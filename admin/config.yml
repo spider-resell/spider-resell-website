@@ -1,0 +1,31 @@
+backend:
+  name: git-gateway
+  branch: main
+
+media_folder: "images/uploads"
+public_folder: "/images/uploads"
+
+collections:
+  - name: data
+    label: Data
+    files:
+      - name: listings
+        label: Listings
+        file: listings.json
+        format: json
+        fields:
+          - label: Listings
+            name: listings
+            widget: list
+            allow_add: true
+            fields:
+              - { name: id, label: ID, widget: number }
+              - { name: username, label: Username, widget: string }
+              - { name: followers, label: Followers, widget: string }
+              - { name: usaPercent, label: USA Percent, widget: string }
+              - { name: genderSplit, label: Gender Split, widget: string }
+              - { name: oge, label: OGE, widget: string }
+              - { name: price, label: Price, widget: string }
+              - { name: photo, label: Photo, widget: image }
+              - { name: notes, label: Notes, widget: text }
+              - { name: additionalNotes, label: Additional Notes, widget: text }

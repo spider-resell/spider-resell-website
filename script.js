@@ -58,20 +58,32 @@ const newListingForm = document.getElementById('newListingForm');
 const adminListings = document.getElementById('adminListings');
 
 // Initialize the app
-document.addEventListener('DOMContentLoaded', function() {
-    loadListings();
+document.addEventListener('DOMContentLoaded', async function() {
+    await loadListings();
     renderListings();
     setupEventListeners();
     checkAdminSession();
 });
 
 // Load listings from localStorage or use sample data
-function loadListings() {
+async function loadListings() {
+    try {
+        const res = await fetch('listings.json', { cache: 'no-store' });
+        if (res.ok) {
+            const data = await res.json();
+            if (data && Array.isArray(data.listings)) {
+                listings = data.listings;
+                return;
+            }
+        }
+    } catch (err) {
+        console.warn('Failed to fetch listings.json, falling back to localStorage:', err);
+    }
+
     const savedListings = localStorage.getItem('spiderResellListings');
     if (savedListings) {
         listings = JSON.parse(savedListings);
     } else {
-        // Save sample data to localStorage
         localStorage.setItem('spiderResellListings', JSON.stringify(listings));
     }
 }
