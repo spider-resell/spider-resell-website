@@ -168,7 +168,8 @@ function setupEventListeners() {
     
     // Cancel button
     document.getElementById('cancelBtn').onclick = function() {
-        newListingForm.reset();
+        // Reset fully to add mode
+        resetForm();
     };
 }
 
@@ -304,6 +305,9 @@ function editListing(id) {
         e.preventDefault();
         updateListing(id);
     };
+    // In edit mode, photo upload is optional
+    const photoInput = document.getElementById('newPhoto');
+    if (photoInput) photoInput.required = false;
     
     // Scroll to form
     document.querySelector('.add-listing-form').scrollIntoView({ behavior: 'smooth' });
@@ -371,6 +375,9 @@ function resetForm() {
         handleNewListing();
     };
     document.querySelector('.confirm-btn').textContent = 'Confirm';
+    // Return photo input to required in add mode (HTML may not have required)
+    const photoInput = document.getElementById('newPhoto');
+    if (photoInput) photoInput.required = true;
 }
 
 // Drag and drop functionality for admin (enhanced)
