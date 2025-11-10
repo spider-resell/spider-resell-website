@@ -8,6 +8,42 @@
   <script src="https://unpkg.com/decap-cms@^3.0.0/dist/decap-cms.js"></script>
 </head>
 <body>
+  <div id="cms-loading" style="font-family: system-ui, -apple-system, Segoe UI, Roboto; padding: 16px; color: #222;">
+    Loading CMS… If this never loads, disable extensions (ad blockers) and try incognito.
+  </div>
+  <script>
+    (function() {
+      function initCMS() {
+        try {
+          if (window.CMS && typeof window.CMS.init === 'function') {
+            window.CMS.init();
+            var el = document.getElementById('cms-loading');
+            if (el) el.parentNode.removeChild(el);
+          }
+        } catch (e) {
+          console.error('CMS init error:', e);
+        }
+      }
+
+      // If primary CDN fails/blocked, load fallback from jsDelivr
+      if (!(window.CMS && typeof window.CMS.init === 'function')) {
+        var fallback = document.createElement('script');
+        fallback.src = 'https://cdn.jsdelivr.net/npm/decap-cms@3.0.0/dist/decap-cms.js';
+        fallback.onload = initCMS;
+        fallback.onerror = function() {
+          console.error('Failed to load CMS from jsDelivr fallback');
+        };
+        document.head.appendChild(fallback);
+      }
+
+      // Try init if CMS already loaded from unpkg
+      if (document.readyState === 'complete' || document.readyState === 'interactive') {
+        initCMS();
+      } else {
+        window.addEventListener('DOMContentLoaded', initCMS);
+      }
+    })();
+  </script>
   <script>
     if (window.netlifyIdentity) {
       window.netlifyIdentity.on('init', (user) => {
