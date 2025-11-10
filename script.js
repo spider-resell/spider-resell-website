@@ -148,7 +148,8 @@ function toggleExtendedInfo(listingId) {
 function setupEventListeners() {
     // Admin login modal
     adminLoginBtn.onclick = function() {
-        adminModal.style.display = 'block';
+        // Redirect to Decap CMS admin for persistent edits
+        window.location.href = '/admin/';
     }
     
     closeModal.onclick = function() {
@@ -161,11 +162,11 @@ function setupEventListeners() {
         }
     }
     
-    // Admin login form
-    adminLoginForm.addEventListener('submit', function(e) {
-        e.preventDefault();
-        handleAdminLogin();
-    });
+    // Disable built-in modal login in favor of CMS
+    // adminLoginForm.addEventListener('submit', function(e) {
+    //     e.preventDefault();
+    //     handleAdminLogin();
+    // });
     
     // Logout
     logoutBtn.onclick = function() {

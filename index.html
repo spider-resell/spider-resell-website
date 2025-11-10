@@ -6,6 +6,7 @@
     <title>SPIDER RESELL - Find the page that's perfect for you</title>
     <link rel="stylesheet" href="styles.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
 </head>
 <body>
     <!-- Jet Black Banner -->
@@ -94,6 +95,20 @@
         </div>
     </div>
 
+    <script>
+      // Handle Netlify Identity invite/confirmation tokens on the homepage
+      (function() {
+        const hash = window.location.hash || '';
+        const hasIdentityToken = /invite_token|confirmation_token|recovery_token/.test(hash);
+        if (hasIdentityToken && window.netlifyIdentity) {
+          // Open login so the widget can complete the flow, then redirect to CMS
+          window.netlifyIdentity.open('login');
+          window.netlifyIdentity.on('login', function() {
+            window.location.href = '/admin/';
+          });
+        }
+      })();
+    </script>
     <script src="script.js"></script>
 </body>
 </html>
