@@ -1,5 +1,5 @@
 [build]
-  publish = "spider-resell-website"
+  publish = "."
   command = "echo 'No build step required for static site'"
 
 [build.environment]
