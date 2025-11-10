@@ -1,0 +1,449 @@
+/* Reset and Base Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+    background-color: #ffffff;
+    color: #000000;
+    line-height: 1.6;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+/* Jet Black Banner */
+.banner {
+    background-color: #000000;
+    padding: 40px 0;
+    text-align: center;
+}
+
+.logo {
+    color: #ffffff;
+    font-size: 3.5rem;
+    font-weight: 700;
+    letter-spacing: 2px;
+    margin-bottom: 10px;
+}
+
+.tagline {
+    color: #ffffff;
+    font-size: 1.2rem;
+    font-weight: 400;
+    opacity: 0.9;
+}
+
+/* Main Content */
+.main-content {
+    padding: 40px 0;
+    min-height: calc(100vh - 200px);
+}
+
+/* Admin Access Button */
+.admin-access {
+    text-align: right;
+    margin-bottom: 30px;
+}
+
+.admin-btn {
+    background-color: #000000;
+    color: #ffffff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 600;
+    transition: background-color 0.3s ease;
+}
+
+.admin-btn:hover {
+    background-color: #333333;
+}
+
+/* Listings Grid */
+.listings-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 30px;
+    margin: 0 auto;
+    max-width: 1100px;
+}
+
+/* Individual Listing Card */
+.listing-card {
+    background: #ffffff;
+    border: 2px solid #000000;
+    border-radius: 15px;
+    padding: 20px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.listing-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+}
+
+.listing-photo {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 10px;
+    margin-bottom: 15px;
+}
+
+.listing-username {
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: #000000;
+    margin-bottom: 10px;
+}
+
+.divider {
+    height: 1px;
+    background-color: #cccccc;
+    margin: 15px 0;
+}
+
+.listing-info {
+    font-size: 0.9rem;
+    color: #333333;
+    margin-bottom: 8px;
+    line-height: 1.4;
+}
+
+.listing-price {
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: #000000;
+    margin: 15px 0;
+}
+
+/* CTA Button */
+.buy-button {
+    background-color: #000000;
+    color: #ffffff;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 8px;
+    font-weight: 600;
+    cursor: pointer;
+    text-decoration: none;
+    display: inline-block;
+    transition: background-color 0.3s ease;
+    position: absolute;
+    bottom: 20px;
+    right: 20px;
+}
+
+.buy-button:hover {
+    background-color: #333333;
+}
+
+/* View More Button */
+.view-more-btn {
+    background-color: transparent;
+    color: #000000;
+    border: 1px solid #000000;
+    padding: 8px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 0.9rem;
+    margin-top: 10px;
+    transition: all 0.3s ease;
+}
+
+.view-more-btn:hover {
+    background-color: #000000;
+    color: #ffffff;
+}
+
+/* Extended Info (Dropdown) */
+.extended-info {
+    margin-top: 15px;
+    padding-top: 15px;
+    border-top: 1px solid #eeeeee;
+    display: none;
+}
+
+.extended-info.show {
+    display: block;
+}
+
+/* Modal Styles */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+.modal-content {
+    background-color: #ffffff;
+    margin: 15% auto;
+    padding: 30px;
+    border: 2px solid #000000;
+    border-radius: 10px;
+    width: 90%;
+    max-width: 400px;
+    position: relative;
+}
+
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+    position: absolute;
+    right: 15px;
+    top: 10px;
+}
+
+.close:hover {
+    color: #000;
+}
+
+.modal-content h2 {
+    margin-bottom: 20px;
+    color: #000000;
+}
+
+.modal-content input {
+    width: 100%;
+    padding: 12px;
+    margin-bottom: 15px;
+    border: 1px solid #cccccc;
+    border-radius: 5px;
+    font-size: 14px;
+}
+
+.modal-content button {
+    width: 100%;
+    padding: 12px;
+    background-color: #000000;
+    color: #ffffff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: 600;
+}
+
+.modal-content button:hover {
+    background-color: #333333;
+}
+
+/* Admin Dashboard */
+.admin-dashboard {
+    padding: 40px 0;
+    min-height: 100vh;
+    background-color: #f5f5f5;
+}
+
+.admin-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+}
+
+.admin-header h2 {
+    color: #000000;
+    font-size: 2rem;
+}
+
+.logout-btn {
+    background-color: #dc3545;
+    color: #ffffff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: 600;
+}
+
+.logout-btn:hover {
+    background-color: #c82333;
+}
+
+/* Add Listing Form */
+.add-listing-form {
+    background: #ffffff;
+    padding: 30px;
+    border-radius: 10px;
+    border: 1px solid #dddddd;
+    margin-bottom: 40px;
+}
+
+.add-listing-form h3 {
+    margin-bottom: 20px;
+    color: #000000;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    display: block;
+    font-weight: 600;
+    margin-bottom: 8px;
+    color: #000000;
+}
+
+.form-group input,
+.form-group textarea {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #cccccc;
+    border-radius: 5px;
+    font-size: 14px;
+    margin-left: 20px;
+}
+
+.form-group textarea {
+    resize: vertical;
+    min-height: 80px;
+}
+
+.form-buttons {
+    display: flex;
+    justify-content: flex-end;
+    gap: 15px;
+    margin-top: 30px;
+}
+
+.back-btn {
+    background-color: #6c757d;
+    color: #ffffff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: 600;
+}
+
+.back-btn:hover {
+    background-color: #5a6268;
+}
+
+.confirm-btn {
+    background-color: #28a745;
+    color: #ffffff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: 600;
+}
+
+.confirm-btn:hover {
+    background-color: #218838;
+}
+
+/* Admin Listings */
+.admin-listings {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 25px;
+}
+
+.admin-listing-card {
+    background: #ffffff;
+    border: 1px solid #dddddd;
+    border-radius: 10px;
+    padding: 20px;
+    position: relative;
+}
+
+.admin-listing-card img {
+    width: 100%;
+    height: 150px;
+    object-fit: cover;
+    border-radius: 8px;
+    margin-bottom: 15px;
+}
+
+.admin-actions {
+    display: flex;
+    gap: 10px;
+    margin-top: 15px;
+}
+
+.admin-actions button {
+    padding: 8px 12px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 12px;
+    font-weight: 600;
+}
+
+.edit-btn {
+    background-color: #007bff;
+    color: #ffffff;
+}
+
+.edit-btn:hover {
+    background-color: #0056b3;
+}
+
+.delete-btn {
+    background-color: #dc3545;
+    color: #ffffff;
+}
+
+.delete-btn:hover {
+    background-color: #c82333;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .listings-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 20px;
+    }
+    
+    .logo {
+        font-size: 2.5rem;
+    }
+    
+    .container {
+        padding: 0 15px;
+    }
+}
+
+@media (max-width: 480px) {
+    .listings-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+    
+    .logo {
+        font-size: 2rem;
+    }
+    
+    .banner {
+        padding: 30px 0;
+    }
+    
+    .buy-button {
+        position: static;
+        width: 100%;
+        margin-top: 15px;
+    }
+}
