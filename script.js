@@ -50,6 +50,8 @@ const closeModal = document.querySelector('.close');
 const adminLoginForm = document.getElementById('adminLoginForm');
 const adminDashboard = document.getElementById('adminDashboard');
 const logoutBtn = document.getElementById('logoutBtn');
+const cmsBtn = document.getElementById('cmsBtn');
+const downloadBtn = document.getElementById('downloadBtn');
 const newListingForm = document.getElementById('newListingForm');
 const adminListings = document.getElementById('adminListings');
 
@@ -159,6 +161,12 @@ function setupEventListeners() {
     });
     logoutBtn.onclick = function() {
         logoutAdmin();
+    };
+    cmsBtn.onclick = function() {
+        window.location.href = '/admin/';
+    };
+    downloadBtn.onclick = function() {
+        downloadLocalListings();
     };
     newListingForm.addEventListener('submit', function(e) {
         e.preventDefault();
@@ -332,6 +340,19 @@ function resetForm() {
     document.querySelector('.confirm-btn').textContent = 'Confirm';
     const photoInput = document.getElementById('newPhoto');
     if (photoInput) photoInput.required = true;
+}
+
+function downloadLocalListings() {
+    const data = { listings };
+    const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = 'listings.json';
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
 }
 
 document.addEventListener('DOMContentLoaded', function() {
