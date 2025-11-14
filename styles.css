@@ -170,7 +170,7 @@ body::before {
 
 /* CTA Button */
 .buy-button {
-    background-color: #D4A037;
+    background-color: #4DB8FF;
     color: #ffffff;
     padding: 12px 20px;
     border: none;
@@ -186,7 +186,7 @@ body::before {
 }
 
 .buy-button:hover {
-    background-color: #bf8c2e;
+    background-color: #3AA7F0;
 }
 
 .chat-bubble {
@@ -211,8 +211,8 @@ body::before {
 
 /* View More Button */
 .view-more-btn {
-    background-color: #E7B686;
-    color: #ffffff;
+    background-color: #F2F7FA;
+    color: #0F6FAF;
     border: none;
     padding: 8px 15px;
     border-radius: 8px;
