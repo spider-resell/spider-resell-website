@@ -52,6 +52,7 @@ const adminDashboard = document.getElementById('adminDashboard');
 const logoutBtn = document.getElementById('logoutBtn');
 const cmsBtn = document.getElementById('cmsBtn');
 const downloadBtn = document.getElementById('downloadBtn');
+const resetBtn = document.getElementById('resetBtn');
 const newListingForm = document.getElementById('newListingForm');
 const adminListings = document.getElementById('adminListings');
 
@@ -71,9 +72,9 @@ document.addEventListener('DOMContentLoaded', async function() {
 
 async function loadListingsPublic() {
     try {
-        let res = await fetch('listings.json', { cache: 'no-store' });
+        let res = await fetch('listings.json?v=' + Date.now(), { cache: 'no-store' });
         if (!res.ok) {
-            res = await fetch('/listings.json', { cache: 'no-store' });
+            res = await fetch('/listings.json?v=' + Date.now(), { cache: 'no-store' });
         }
         if (res.ok) {
             const data = await res.json();
@@ -99,9 +100,9 @@ async function loadListingsAdmin() {
         return;
     }
     try {
-        let res = await fetch('listings.json', { cache: 'no-store' });
+        let res = await fetch('listings.json?v=' + Date.now(), { cache: 'no-store' });
         if (!res.ok) {
-            res = await fetch('/listings.json', { cache: 'no-store' });
+            res = await fetch('/listings.json?v=' + Date.now(), { cache: 'no-store' });
         }
         if (res.ok) {
             const data = await res.json();
@@ -196,6 +197,9 @@ function setupEventListeners() {
     };
     downloadBtn.onclick = function() {
         downloadLocalListings();
+    };
+    resetBtn.onclick = function() {
+        resetLocalData();
     };
     newListingForm.addEventListener('submit', function(e) {
         e.preventDefault();
@@ -373,6 +377,14 @@ function resetForm() {
     document.querySelector('.confirm-btn').textContent = 'Confirm';
     const photoInput = document.getElementById('newPhoto');
     if (photoInput) photoInput.required = true;
+}
+
+function resetLocalData() {
+    localStorage.removeItem('spiderResellListings');
+    localStorage.removeItem('spiderResellLocalOverride');
+    loadListingsPublic().then(() => {
+        renderListings();
+    });
 }
 
 function downloadLocalListings() {
