@@ -119,8 +119,8 @@ body::before {
 
 /* Individual Listing Card */
 .listing-card {
-    background: #ffffff;
-    border: 2px solid #000000;
+    background: #2A0A0A;
+    border: 1px solid rgba(255, 255, 255, 0.08);
     border-radius: 15px;
     padding: 20px;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
@@ -144,19 +144,19 @@ body::before {
 .listing-username {
     font-size: 1.4rem;
     font-weight: 700;
-    color: #000000;
+    color: #ffffff;
     margin-bottom: 10px;
 }
 
 .divider {
     height: 1px;
-    background-color: #cccccc;
+    background-color: rgba(255, 255, 255, 0.15);
     margin: 15px 0;
 }
 
 .listing-info {
     font-size: 0.9rem;
-    color: #333333;
+    color: #ffffff;
     margin-bottom: 8px;
     line-height: 1.4;
 }
@@ -164,13 +164,13 @@ body::before {
 .listing-price {
     font-size: 1.4rem;
     font-weight: 700;
-    color: #000000;
+    color: #ffffff;
     margin: 15px 0;
 }
 
 /* CTA Button */
 .buy-button {
-    background-color: #000000;
+    background-color: #D4A037;
     color: #ffffff;
     padding: 12px 20px;
     border: none;
@@ -186,7 +186,7 @@ body::before {
 }
 
 .buy-button:hover {
-    background-color: #333333;
+    background-color: #bf8c2e;
 }
 
 .chat-bubble {
@@ -211,11 +211,11 @@ body::before {
 
 /* View More Button */
 .view-more-btn {
-    background-color: transparent;
-    color: #000000;
-    border: 1px solid #000000;
+    background-color: #E7B686;
+    color: #ffffff;
+    border: none;
     padding: 8px 15px;
-    border-radius: 5px;
+    border-radius: 8px;
     cursor: pointer;
     font-size: 0.9rem;
     margin-top: 10px;
@@ -223,16 +223,16 @@ body::before {
 }
 
 .view-more-btn:hover {
-    background-color: #000000;
-    color: #ffffff;
+    filter: brightness(0.95);
 }
 
 /* Extended Info (Dropdown) */
 .extended-info {
     margin-top: 15px;
     padding-top: 15px;
-    border-top: 1px solid #eeeeee;
+    border-top: 1px solid rgba(255, 255, 255, 0.12);
     display: none;
+    background-color: #2A0A0A;
 }
 
 .extended-info.show {
