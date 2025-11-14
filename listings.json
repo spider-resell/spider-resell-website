@@ -23,6 +23,18 @@
       "photo": "https://via.placeholder.com/300x200/000000/ffffff?text=Travel+Page",
       "notes": "Stunning travel photography page with viral potential.",
       "additionalNotes": "Premium travel content with professional photography. Partnerships with hotels and tourism boards available."
+    },
+    {
+      "id": 1763094882785,
+      "username": "test",
+      "followers": "test",
+      "usaPercent": "test",
+      "genderSplit": "test",
+      "oge": "test",
+      "price": "test",
+      "photo": "https://via.placeholder.com/300x200/000000/ffffff?text=New+Page",
+      "notes": "Click view more for additional information",
+      "additionalNotes": "No additional notes provided."
     }
   ]
 }
