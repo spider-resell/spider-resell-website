@@ -62,6 +62,11 @@ document.addEventListener('DOMContentLoaded', async function() {
 });
 
 async function loadListings() {
+    const savedListings = localStorage.getItem('spiderResellListings');
+    if (savedListings) {
+        listings = JSON.parse(savedListings);
+        return;
+    }
     try {
         let res = await fetch('listings.json', { cache: 'no-store' });
         if (!res.ok) {
@@ -71,17 +76,12 @@ async function loadListings() {
             const data = await res.json();
             if (data && Array.isArray(data.listings)) {
                 listings = data.listings;
+                localStorage.setItem('spiderResellListings', JSON.stringify(listings));
                 return;
             }
         }
     } catch (err) {}
-
-    const savedListings = localStorage.getItem('spiderResellListings');
-    if (savedListings) {
-        listings = JSON.parse(savedListings);
-    } else {
-        localStorage.setItem('spiderResellListings', JSON.stringify(listings));
-    }
+    localStorage.setItem('spiderResellListings', JSON.stringify(listings));
 }
 
 // Save listings to localStorage
