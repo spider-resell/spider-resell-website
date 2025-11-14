@@ -149,7 +149,7 @@ function createListingCard(listing) {
         <div class="extended-info" id="extended-${listing.id}">
             <div class="listing-info">${listing.additionalNotes}</div>
         </div>
-        <a href="https://t.me/criempie" target="_blank" class="buy-button">Buy This Page!</a>
+        <a href="https://t.me/m/4FxymwOvM2Zk" target="_blank" class="buy-button">Buy This Page!</a>
     `;
     
     return card;
