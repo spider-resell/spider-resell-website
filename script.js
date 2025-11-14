@@ -55,6 +55,7 @@ const downloadBtn = document.getElementById('downloadBtn');
 const resetBtn = document.getElementById('resetBtn');
 const newListingForm = document.getElementById('newListingForm');
 const adminListings = document.getElementById('adminListings');
+const chatBubble = document.getElementById('chatBubble');
 
 // Initialize the app
 document.addEventListener('DOMContentLoaded', async function() {
@@ -217,6 +218,7 @@ function handleAdminLogin() {
         adminModal.style.display = 'none';
         document.querySelector('.main-content').style.display = 'none';
         adminDashboard.style.display = 'block';
+        if (chatBubble) chatBubble.style.display = 'none';
         adminLoginForm.reset();
         renderAdminListings();
         alert('Admin login successful!');
@@ -229,6 +231,7 @@ function checkAdminSession() {
     if (sessionStorage.getItem('spiderResellAdmin') === 'true') {
         document.querySelector('.main-content').style.display = 'none';
         adminDashboard.style.display = 'block';
+        if (chatBubble) chatBubble.style.display = 'none';
         renderAdminListings();
     }
 }
@@ -237,6 +240,7 @@ function logoutAdmin() {
     sessionStorage.removeItem('spiderResellAdmin');
     document.querySelector('.main-content').style.display = 'block';
     adminDashboard.style.display = 'none';
+    if (chatBubble) chatBubble.style.display = 'inline-block';
     renderListings();
 }
 
