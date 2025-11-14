@@ -58,7 +58,8 @@ const adminListings = document.getElementById('adminListings');
 // Initialize the app
 document.addEventListener('DOMContentLoaded', async function() {
     const isAdmin = sessionStorage.getItem('spiderResellAdmin') === 'true';
-    if (isAdmin) {
+    const override = localStorage.getItem('spiderResellLocalOverride') === 'true';
+    if (isAdmin || override) {
         await loadListingsAdmin();
     } else {
         await loadListingsPublic();
@@ -288,6 +289,7 @@ function handleNewListing() {
 function addListing(listing) {
     listings.push(listing);
     saveListings();
+    localStorage.setItem('spiderResellLocalOverride', 'true');
     renderAdminListings();
     renderListings();
     newListingForm.reset();
@@ -334,6 +336,7 @@ function updateListing(id) {
             updatedListing.photo = e.target.result;
             listings[listingIndex] = updatedListing;
             saveListings();
+            localStorage.setItem('spiderResellLocalOverride', 'true');
             renderAdminListings();
             renderListings();
             resetForm();
@@ -342,6 +345,7 @@ function updateListing(id) {
     } else {
         listings[listingIndex] = updatedListing;
         saveListings();
+        localStorage.setItem('spiderResellLocalOverride', 'true');
         renderAdminListings();
         renderListings();
         resetForm();
@@ -353,6 +357,7 @@ function deleteListing(id) {
     if (confirm('Are you sure you want to delete this listing?')) {
         listings = listings.filter(l => l.id !== id);
         saveListings();
+        localStorage.setItem('spiderResellLocalOverride', 'true');
         renderAdminListings();
         renderListings();
         alert('Listing deleted successfully!');
