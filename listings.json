@@ -13,18 +13,6 @@
       "additionalNotes": "This page has been growing steadily for 2 years with organic content. Audience is primarily 18-35 age range. Perfect for fashion, beauty, and lifestyle brands."
     },
     {
-      "id": 2,
-      "username": "@fitness_motivation",
-      "followers": "89K",
-      "usaPercent": "82%",
-      "genderSplit": "45F/55M",
-      "oge": "Yes",
-      "price": "BIN - $850",
-      "photo": "https://via.placeholder.com/300x200/000000/ffffff?text=Fitness+Page",
-      "notes": "Active fitness community with daily engagement.",
-      "additionalNotes": "Established fitness page with workout routines, nutrition tips, and transformation stories. High story views and save rates."
-    },
-    {
       "id": 3,
       "username": "@travel_vibes",
       "followers": "234K",
@@ -35,6 +23,18 @@
       "photo": "https://via.placeholder.com/300x200/000000/ffffff?text=Travel+Page",
       "notes": "Stunning travel photography page with viral potential.",
       "additionalNotes": "Premium travel content with professional photography. Partnerships with hotels and tourism boards available."
+    },
+    {
+      "id": 1763094882785,
+      "username": "test",
+      "followers": "test",
+      "usaPercent": "test",
+      "genderSplit": "test",
+      "oge": "test",
+      "price": "test",
+      "photo": "https://via.placeholder.com/300x200/000000/ffffff?text=New+Page",
+      "notes": "Click view more for additional information",
+      "additionalNotes": "No additional notes provided."
     }
   ]
 }
