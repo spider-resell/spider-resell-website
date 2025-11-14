@@ -57,13 +57,41 @@ const adminListings = document.getElementById('adminListings');
 
 // Initialize the app
 document.addEventListener('DOMContentLoaded', async function() {
-    await loadListings();
+    const isAdmin = sessionStorage.getItem('spiderResellAdmin') === 'true';
+    if (isAdmin) {
+        await loadListingsAdmin();
+    } else {
+        await loadListingsPublic();
+    }
     renderListings();
     setupEventListeners();
     checkAdminSession();
 });
 
-async function loadListings() {
+async function loadListingsPublic() {
+    try {
+        let res = await fetch('listings.json', { cache: 'no-store' });
+        if (!res.ok) {
+            res = await fetch('/listings.json', { cache: 'no-store' });
+        }
+        if (res.ok) {
+            const data = await res.json();
+            if (data && Array.isArray(data.listings)) {
+                listings = data.listings;
+                localStorage.setItem('spiderResellListings', JSON.stringify(listings));
+                return;
+            }
+        }
+    } catch (err) {}
+    const savedListings = localStorage.getItem('spiderResellListings');
+    if (savedListings) {
+        listings = JSON.parse(savedListings);
+        return;
+    }
+    localStorage.setItem('spiderResellListings', JSON.stringify(listings));
+}
+
+async function loadListingsAdmin() {
     const savedListings = localStorage.getItem('spiderResellListings');
     if (savedListings) {
         listings = JSON.parse(savedListings);
