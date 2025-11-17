@@ -53,6 +53,7 @@ const logoutBtn = document.getElementById('logoutBtn');
 const cmsBtn = document.getElementById('cmsBtn');
 const downloadBtn = document.getElementById('downloadBtn');
 const resetBtn = document.getElementById('resetBtn');
+const saveFileBtn = document.getElementById('saveFileBtn');
 const uploadBtn = document.getElementById('uploadBtn');
 const dataFileInput = document.getElementById('dataFileInput');
 const newListingForm = document.getElementById('newListingForm');
@@ -138,9 +139,10 @@ function renderListings() {
 function createListingCard(listing) {
     const card = document.createElement('div');
     card.className = 'listing-card';
+    const uname = String(listing.username || '').replace(/^@/, '');
     card.innerHTML = `
-        <img src="${listing.photo}" alt="${listing.username}" class="listing-photo">
         <div class="listing-username">${listing.username}</div>
+        <a href="https://www.instagram.com/${uname}" target="_blank" class="page-link">Link to page</a>
         <div class="divider"></div>
         <div class="listing-info">Followers: ${listing.followers}</div>
         <div class="listing-info">USA: ${listing.usaPercent}</div>
@@ -198,6 +200,11 @@ function setupEventListeners() {
     cmsBtn.onclick = function() {
         window.location.href = '/admin/';
     };
+    if (saveFileBtn) {
+        saveFileBtn.onclick = function() {
+            saveDataToFile();
+        };
+    }
     if (uploadBtn && dataFileInput) {
         uploadBtn.onclick = function() {
             dataFileInput.click();
@@ -288,9 +295,10 @@ function renderAdminListings() {
 function createAdminListingCard(listing) {
     const card = document.createElement('div');
     card.className = 'admin-listing-card';
+    const uname = String(listing.username || '').replace(/^@/, '');
     card.innerHTML = `
-        <img src="${listing.photo}" alt="${listing.username}">
         <div class="listing-username">${listing.username}</div>
+        <a href="https://www.instagram.com/${uname}" target="_blank" class="page-link">Link to page</a>
         <div class="listing-info">${listing.followers} followers</div>
         <div class="listing-price">${listing.price}</div>
         <div class="admin-actions">
@@ -310,21 +318,10 @@ function handleNewListing() {
         genderSplit: document.getElementById('newGenderSplit').value,
         oge: document.getElementById('newOGE').value,
         price: document.getElementById('newPrice').value,
-        photo: 'https://via.placeholder.com/300x200/000000/ffffff?text=New+Page',
         notes: 'Click view more for additional information',
         additionalNotes: document.getElementById('newNotes').value || 'No additional notes provided.'
     };
-    const photoInput = document.getElementById('newPhoto');
-    if (photoInput.files && photoInput.files[0]) {
-        const reader = new FileReader();
-        reader.onload = function(e) {
-            newListing.photo = e.target.result;
-            addListing(newListing);
-        };
-        reader.readAsDataURL(photoInput.files[0]);
-    } else {
-        addListing(newListing);
-    }
+    addListing(newListing);
 }
 
 function addListing(listing) {
@@ -351,8 +348,6 @@ function editListing(id) {
         e.preventDefault();
         updateListing(id);
     };
-    const photoInput = document.getElementById('newPhoto');
-    if (photoInput) photoInput.required = false;
     document.querySelector('.add-listing-form').scrollIntoView({ behavior: 'smooth' });
     document.querySelector('.confirm-btn').textContent = 'Update Listing';
 }
@@ -370,27 +365,12 @@ function updateListing(id) {
         price: document.getElementById('newPrice').value,
         additionalNotes: document.getElementById('newNotes').value
     };
-    const photoInput = document.getElementById('newPhoto');
-    if (photoInput.files && photoInput.files[0]) {
-        const reader = new FileReader();
-        reader.onload = function(e) {
-            updatedListing.photo = e.target.result;
-            listings[listingIndex] = updatedListing;
-            saveListings();
-            localStorage.setItem('spiderResellLocalOverride', 'true');
-            renderAdminListings();
-            renderListings();
-            resetForm();
-        };
-        reader.readAsDataURL(photoInput.files[0]);
-    } else {
-        listings[listingIndex] = updatedListing;
-        saveListings();
-        localStorage.setItem('spiderResellLocalOverride', 'true');
-        renderAdminListings();
-        renderListings();
-        resetForm();
-    }
+    listings[listingIndex] = updatedListing;
+    saveListings();
+    localStorage.setItem('spiderResellLocalOverride', 'true');
+    renderAdminListings();
+    renderListings();
+    resetForm();
     alert('Listing updated successfully!');
 }
 
@@ -412,8 +392,6 @@ function resetForm() {
         handleNewListing();
     };
     document.querySelector('.confirm-btn').textContent = 'Confirm';
-    const photoInput = document.getElementById('newPhoto');
-    if (photoInput) photoInput.required = true;
 }
 
 function resetLocalData() {
@@ -437,47 +415,22 @@ function downloadLocalListings() {
     URL.revokeObjectURL(url);
 }
 
-document.addEventListener('DOMContentLoaded', function() {
-    const photoInput = document.getElementById('newPhoto');
-    const photoLabel = photoInput.parentElement;
-    const dropZone = document.createElement('div');
-    dropZone.className = 'drop-zone';
-    dropZone.innerHTML = 'Drag and drop image here or click to select';
-    dropZone.style.cssText = `
-        border: 2px dashed #cccccc;
-        border-radius: 5px;
-        padding: 20px;
-        text-align: center;
-        cursor: pointer;
-        margin-top: 10px;
-        transition: all 0.3s ease;
-    `;
-    photoLabel.parentElement.appendChild(dropZone);
-    photoInput.style.display = 'none';
-    dropZone.onclick = () => photoInput.click();
-    dropZone.addEventListener('dragover', function(e) {
-        e.preventDefault();
-        this.style.borderColor = '#000000';
-        this.style.backgroundColor = '#f0f0f0';
-    });
-    dropZone.addEventListener('dragleave', function(e) {
-        e.preventDefault();
-        this.style.borderColor = '#cccccc';
-        this.style.backgroundColor = 'transparent';
-    });
-    dropZone.addEventListener('drop', function(e) {
-        e.preventDefault();
-        this.style.borderColor = '#cccccc';
-        this.style.backgroundColor = 'transparent';
-        const files = e.dataTransfer.files;
-        if (files.length > 0 && files[0].type.startsWith('image/')) {
-            photoInput.files = files;
-            dropZone.textContent = `Selected: ${files[0].name}`;
-        }
-    });
-    photoInput.addEventListener('change', function() {
-        if (this.files.length > 0) {
-            dropZone.textContent = `Selected: ${this.files[0].name}`;
-        }
-    });
-});
+async function saveDataToFile() {
+    const data = { listings };
+    const text = JSON.stringify(data, null, 2);
+    if (window.showSaveFilePicker) {
+        try {
+            const handle = await window.showSaveFilePicker({
+                suggestedName: 'listings.json',
+                types: [{ description: 'JSON', accept: { 'application/json': ['.json'] } }]
+            });
+            const writable = await handle.createWritable();
+            await writable.write(text);
+            await writable.close();
+            alert('Saved to file. Replace your project listings.json if needed.');
+            return;
+        } catch (e) {}
+    }
+    downloadLocalListings();
+}
+

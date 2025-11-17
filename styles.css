@@ -198,6 +198,23 @@ body::before {
     background-color: #3AA7F0;
 }
 
+.page-link {
+    background-color: #3AA7F0;
+    color: #ffffff;
+    padding: 6px 10px;
+    border: none;
+    border-radius: 6px;
+    font-weight: 600;
+    font-size: 0.85rem;
+    text-decoration: none;
+    display: inline-block;
+    margin: 6px 0 10px 0;
+}
+
+.page-link:hover {
+    filter: brightness(0.95);
+}
+
 .chat-bubble {
     position: fixed;
     bottom: 20px;
