@@ -129,6 +129,14 @@ body::before {
     overflow: hidden;
 }
 
+.listings-grid .listing-card:nth-child(2) {
+    background: #3AA7F0;
+}
+
+.listings-grid .listing-card:nth-child(2) .extended-info {
+    background-color: #3AA7F0;
+}
+
 .listing-card:hover {
     transform: translateY(-5px);
     box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
