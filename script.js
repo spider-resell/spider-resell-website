@@ -53,6 +53,8 @@ const logoutBtn = document.getElementById('logoutBtn');
 const cmsBtn = document.getElementById('cmsBtn');
 const downloadBtn = document.getElementById('downloadBtn');
 const resetBtn = document.getElementById('resetBtn');
+const uploadBtn = document.getElementById('uploadBtn');
+const dataFileInput = document.getElementById('dataFileInput');
 const newListingForm = document.getElementById('newListingForm');
 const adminListings = document.getElementById('adminListings');
 const chatBubble = document.getElementById('chatBubble');
@@ -196,6 +198,37 @@ function setupEventListeners() {
     cmsBtn.onclick = function() {
         window.location.href = '/admin/';
     };
+    if (uploadBtn && dataFileInput) {
+        uploadBtn.onclick = function() {
+            dataFileInput.click();
+        };
+        dataFileInput.addEventListener('change', function() {
+            if (!this.files || this.files.length === 0) return;
+            const file = this.files[0];
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                try {
+                    const text = e.target.result;
+                    const parsed = JSON.parse(text);
+                    let incoming = Array.isArray(parsed) ? parsed : parsed.listings;
+                    if (!incoming || !Array.isArray(incoming)) {
+                        alert('Invalid file format: expecting an array or { listings: [...] }');
+                        return;
+                    }
+                    listings = incoming;
+                    saveListings();
+                    localStorage.setItem('spiderResellLocalOverride', 'true');
+                    renderAdminListings();
+                    renderListings();
+                    alert('Data imported successfully!');
+                    dataFileInput.value = '';
+                } catch (err) {
+                    alert('Failed to parse JSON file.');
+                }
+            };
+            reader.readAsText(file);
+        });
+    }
     downloadBtn.onclick = function() {
         downloadLocalListings();
     };

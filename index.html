@@ -52,6 +52,7 @@
                 <h2>Admin Dashboard</h2>
                 <div>
                   <button id="cmsBtn" class="edit-btn">Open CMS</button>
+                  <button id="uploadBtn" class="edit-btn">Upload Data</button>
                   <button id="downloadBtn" class="back-btn">Download Data</button>
                   <button id="resetBtn" class="back-btn">Reset Local Data</button>
                   <button id="logoutBtn" class="logout-btn">Logout</button>
@@ -90,6 +91,7 @@
                         <button type="submit" class="confirm-btn">Confirm</button>
                     </div>
                 </form>
+                <input type="file" id="dataFileInput" accept="application/json,text/json" style="display:none" />
             </div>
 
             <div class="admin-listings" id="adminListings"></div>
