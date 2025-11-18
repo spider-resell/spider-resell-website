@@ -235,6 +235,21 @@ body::before {
     background-color: #0066e6;
 }
 
+.tos-footer {
+    position: fixed;
+    left: 50%;
+    transform: translateX(-50%);
+    bottom: 8px;
+    color: #9aa3ad;
+    font-size: 12px;
+    text-decoration: none;
+    z-index: 950;
+}
+
+.tos-footer:hover {
+    color: #b8bfca;
+}
+
 /* View More Button */
 .view-more-btn {
     background-color: #F2F7FA;
