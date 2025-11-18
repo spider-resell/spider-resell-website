@@ -139,7 +139,7 @@ function renderListings() {
 function createListingCard(listing) {
     const card = document.createElement('div');
     card.className = 'listing-card';
-    const uname = String(listing.username || '').replace(/^@/, '');
+    const uname = String(listing.username || '').trim().replace(/^@/, '').replace(/\s+/g, '');
     card.innerHTML = `
         <div class="listing-username">${listing.username}</div>
         <a href="https://www.instagram.com/${uname}" target="_blank" class="page-link">Link to page</a>
@@ -295,7 +295,7 @@ function renderAdminListings() {
 function createAdminListingCard(listing) {
     const card = document.createElement('div');
     card.className = 'admin-listing-card';
-    const uname = String(listing.username || '').replace(/^@/, '');
+    const uname = String(listing.username || '').trim().replace(/^@/, '').replace(/\s+/g, '');
     card.innerHTML = `
         <div class="listing-username">${listing.username}</div>
         <a href="https://www.instagram.com/${uname}" target="_blank" class="page-link">Link to page</a>
