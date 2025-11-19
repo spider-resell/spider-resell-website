@@ -63,8 +63,7 @@ const chatBubble = document.getElementById('chatBubble');
 // Initialize the app
 document.addEventListener('DOMContentLoaded', async function() {
     const isAdmin = sessionStorage.getItem('spiderResellAdmin') === 'true';
-    const override = localStorage.getItem('spiderResellLocalOverride') === 'true';
-    if (isAdmin || override) {
+    if (isAdmin) {
         await loadListingsAdmin();
     } else {
         await loadListingsPublic();
@@ -297,13 +296,15 @@ function createAdminListingCard(listing) {
     card.className = 'admin-listing-card';
     const uname = String(listing.username || '').trim().replace(/^@/, '').replace(/\s+/g, '');
     card.innerHTML = `
-        <div class="listing-username">${listing.username}</div>
+        <div class="listing-username" style="color:#000000">${listing.username}</div>
         <a href="https://www.instagram.com/${uname}" target="_blank" class="page-link">Link to page</a>
         <div class="listing-info">${listing.followers} followers</div>
         <div class="listing-price">${listing.price}</div>
         <div class="admin-actions">
             <button class="edit-btn" onclick="editListing(${listing.id})">Edit</button>
             <button class="delete-btn" onclick="deleteListing(${listing.id})">Delete</button>
+            <button class="edit-btn" onclick="moveListingUp(${listing.id})">Move Up</button>
+            <button class="edit-btn" onclick="moveListingDown(${listing.id})">Move Down</button>
         </div>
     `;
     return card;
@@ -382,6 +383,32 @@ function deleteListing(id) {
         renderAdminListings();
         renderListings();
         alert('Listing deleted successfully!');
+    }
+}
+
+function moveListingUp(id) {
+    const idx = listings.findIndex(l => l.id === id);
+    if (idx > 0) {
+        const tmp = listings[idx - 1];
+        listings[idx - 1] = listings[idx];
+        listings[idx] = tmp;
+        saveListings();
+        localStorage.setItem('spiderResellLocalOverride', 'true');
+        renderAdminListings();
+        renderListings();
+    }
+}
+
+function moveListingDown(id) {
+    const idx = listings.findIndex(l => l.id === id);
+    if (idx !== -1 && idx < listings.length - 1) {
+        const tmp = listings[idx + 1];
+        listings[idx + 1] = listings[idx];
+        listings[idx] = tmp;
+        saveListings();
+        localStorage.setItem('spiderResellLocalOverride', 'true');
+        renderAdminListings();
+        renderListings();
     }
 }
 
